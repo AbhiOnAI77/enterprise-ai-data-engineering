@@ -11,7 +11,7 @@ Each project is designed around realistic business problems, complete with input
 - **Project 1 – Azure SQL to Data Lake Pipeline: Customer 360 Data Ingestion for Enterprise AI**  
   Demonstrates how to build a production-ready ingestion pipeline using Azure Data Factory that moves customer data from Azure SQL Database into Azure Data Lake Gen2 in Parquet format.  
   This ingestion layer is the foundation for Customer 360 platforms, churn prediction models, recommendation engines, feature stores, and LLM-powered applications.  
-  [View Project →](./AzureSQL_to_DataLake/README.md)
+  [View Project →](./AzureSQL_to_DataLake)
 
 - *(More projects will be added here as the repository grows.)*
 
