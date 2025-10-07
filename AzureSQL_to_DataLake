@@ -1,0 +1,88 @@
+# Project 1: Azure SQL to Data Lake Pipeline – Customer 360 Data Ingestion for Enterprise AI
+
+## Project Overview
+
+This project demonstrates how to build a production-ready data ingestion pipeline that moves structured customer data from an Azure SQL Database into Azure Data Lake Storage Gen2 in Parquet format. The pipeline is implemented using Azure Data Factory (ADF) and represents a foundational component of a modern enterprise AI platform.
+
+It enables the ingestion of the `customer_master` table — the single source of truth for customer identities, demographics, and account attributes — from an operational SQL database into the data lake’s raw zone. Once in the lake, this data can power downstream use cases such as Customer 360 platforms, churn prediction, next-best-action recommendations, feature stores, and retrieval-augmented generation (RAG) pipelines.
+
+---
+
+## Business Problem: Enabling AI-Driven Customer Engagement
+
+Large enterprises often face a critical challenge: customer data is siloed inside transactional systems, making it difficult to power AI-driven engagement strategies.
+
+Customer master records (identities, profiles, preferences) are frequently stored in operational databases optimized for transactions — not for analytics or machine learning. As a result:
+
+- AI models lack unified, historical customer data.
+- Retrieval-augmented LLM pipelines don’t have access to enriched customer context.
+- Analytics teams struggle to create Customer 360 views across channels.
+
+This fragmentation limits the enterprise’s ability to predict churn, personalize experiences, and execute next-best-action recommendations — key drivers of revenue and retention in the digital era.
+
+---
+
+## Solution
+
+The solution is to build an ingestion pipeline that moves the `customer_master` table from Azure SQL into a centralized data lake in Parquet format, where it becomes accessible to analytics, machine learning, and AI workloads. This ingestion step is the foundation for all subsequent AI capabilities.
+
+---
+
+## Architecture Overview
+[1] Ingestion Layer
+└── Azure SQL Database (customer_master)
+│
+[2] Storage Layer – Raw Zone
+└── Azure Data Factory (Pipeline: sql_to_datalake)
+│
+[3] AI & Analytics Layer
+└── Azure Data Lake Gen2 Raw Zone (Parquet)
+
+---
+
+## Component Details
+
+| Component | Details |
+|----------|----------|
+| Source | Azure SQL Database |
+| Database | mysqldb2503v1 |
+| Server | mysqldb2503serverv1 |
+| Schema | dbo |
+| Table | customer_master |
+| Sink | Azure Data Lake Gen2 |
+| Storage Account | ade2503biglake |
+| Container | urdata |
+| Output Format | Parquet |
+| Pipeline Name | sql_to_datalake_pipeline |
+
+---
+
+## Workflow Steps
+
+1. **Linked Services:** Define secure connections to Azure SQL Database and Azure Data Lake.
+2. **Source Dataset:** Represents the `customer_master` table in the SQL database.
+3. **Sink Dataset:** Defines the location and format (Parquet) in the data lake.
+4. **Copy Activity:** Extracts data from `customer_master` and writes it into the `urdata` container.
+5. **Schedule Trigger:** Runs daily (or as needed) to keep the data fresh for downstream AI workloads.
+
+---
+
+## How This Pipeline Powers Enterprise AI
+
+Once landed in the data lake, the ingested `customer_master` dataset can fuel a wide range of AI and analytics initiatives:
+
+- Customer 360 views: Join with clickstream, CRM, and support data for holistic profiles.
+- Churn prediction models: Feed historical data into supervised machine learning pipelines.
+- Next-best-action engines: Train recommendation models to drive personalized offers.
+- Retrieval-augmented generation pipelines: Supply structured context to LLM-powered customer support agents.
+- Feature stores: Create reusable features for AI applications across teams.
+
+---
+
+## Business Outcomes
+
+- Faster AI deployment: Provides ready-to-use, high-quality customer data for ML and LLM pipelines.
+- Improved personalization: Enables predictive and prescriptive models for customer engagement.
+- Data democratization: Makes structured customer data available across analytics and AI teams.
+- AI-ready infrastructure: Establishes a scalable data ingestion pattern for future pipelines.
+
